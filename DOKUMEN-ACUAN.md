@@ -6,6 +6,9 @@
 
 Dokumen ini adalah **sumber kebenaran tunggal** untuk pengembangan. Setiap fase dikerjakan berurutan dan berhenti untuk konfirmasi. Jika ada perubahan kebutuhan, dokumen ini diperbarui lebih dulu.
 
+> **Status (15 November 2026):** seluruh Fase 1–7 selesai. LaundryKu **1.0.0**
+> sudah dibangun dan dipublikasikan sebagai GitHub Release.
+
 ---
 
 ## 1. Identitas Aplikasi
@@ -17,6 +20,7 @@ Dokumen ini adalah **sumber kebenaran tunggal** untuk pengembangan. Setiap fase 
 | Identifier Tauri | `com.laundryku.app` |
 | Nama jendela | LaundryKu |
 | Nama installer | LaundryKu (`LaundryKu_<versi>_x64-setup.exe` / `LaundryKu_<versi>_x64_en-US.msi`) |
+| Versi rilis | 1.0.0 — dipublikasikan 15 November 2026 |
 | Logo | Placeholder: ikon `WashingMachine` (lucide-react) di dalam kotak gradien biru–tosca + wordmark "LaundryKu". Disimpan di `src/components/brand/Logo.tsx`, mudah diganti. |
 
 ### Palet warna
@@ -434,9 +438,10 @@ cargo check --manifest-path src-tauri/Cargo.toml
 - Backup memakai snapshot `VACUUM INTO` + plugin `fs` + dialog Save As. Restore memakai dialog Open, konfirmasi, validasi integritas/foreign key/tabel/migrasi/admin aktif, snapshot pengaman, buka ulang pool SQLite, hapus semua sesi, audit, dan logout paksa ke halaman login.
 - Verifikasi: profil, CRUD pegawai, CRUD akun, role otomatis, deaktivasi pegawai -> akun nonaktif, guard admin terakhir/akun sendiri, ganti password, filter/pagination log, backup valid, restore end-to-end + logout, penolakan file invalid, RBAC admin-only, dan penolakan command langsung lulus. Data uji dan file uji dibersihkan; `npm run typecheck`, `npm run build`, dan `cargo check` lulus.
 
-### Fase 7 - Dashboard, Polishing, Rilis
+### Fase 7 - Dashboard, Polishing, Rilis ✅
 - Dashboard final: kartu pendapatan hari ini (dari `payments`), order hari ini, order belum selesai, layanan aktif, grafik pendapatan 7 hari, Status Sistem, dan Akses Cepat sesuai role. Tidak ada query baru di luar `src/db/queries/bootstrap.ts`.
 - Polishing & aksesibilitas: tautan lewati-ke-konten, fokus pindah ke `<main>` setiap perubahan pathname, judul jendela per halaman lewat `src/lib/use-document-title.ts`, error boundary route (`RouteErrorPage`) dengan pemulihan `router.invalidate()`, penjagaan shortcut saat dialog terbuka, `aria-keyshortcuts` pada kontrol `Ctrl+B`/`Ctrl+N`/`Ctrl+K`, fokus tautan yang jelas, dan `prefers-reduced-motion`.
 - Versi tampilan diambil dari `package.json` melalui define Vite `__APP_VERSION__` sehingga footer, sidebar, login, dan dashboard selalu sinkron dengan versi bundle.
 - Rilis 1.0.0: konfigurasi `bundle` di `tauri.conf.json` (produk, publisher, homepage, kategori, deskripsi, ikon, EULA) plus aset installer bermerek di `src-tauri/installer/` (header/sidebar NSIS, banner/dialog WiX, `LICENSE.rtf`, dan `generate-assets.ps1`). NSIS memakai `installMode: perMachine`, bahasa Indonesia, ikon installer/uninstaller, header/sidebar, dan halaman lisensi; MSI memakai banner/dialog serta lisensi RTF. Build final 1.0.0 terverifikasi menghasilkan `LaundryKu_1.0.0_x64-setup.exe` (4,52 MB) dan `LaundryKu_1.0.0_x64_en-US.msi` (6,68 MB); metadata MSI `ProductName`/`Manufacturer` LaundryKu, `ProductVersion` 1.0.0, `ALLUSERS=1`, dan executable aplikasi ber-versi 1.0.0 dengan CompanyName LaundryKu. Installer belum ditandatangani secara digital sehingga SmartScreen dapat menampilkan peringatan.
+- Rilis publik: tag `v1.0.0` dan GitHub Release https://github.com/Mukhamadirfan1997/LAUNDRYKU/releases/tag/v1.0.0 (bukan draft, ditandai *latest*) dengan aset kedua installer dan `LaundryKu-1.0.0-SHA256SUMS.txt`; commit rilis `909f858`.
 - Verifikasi: `npm run typecheck`, `npm run build`, `cargo check`, dan `npm run tauri build` lulus; tidak ada perubahan skema database, command Rust, atau aturan RBAC.
