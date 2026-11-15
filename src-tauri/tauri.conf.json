@@ -1,0 +1,54 @@
+{
+  "$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
+  "productName": "LaundryKu",
+  "version": "0.1.0",
+  "identifier": "com.laundryku.app",
+  "build": {
+    "frontendDist": "../dist",
+    "devUrl": "http://localhost:1420",
+    "beforeDevCommand": "npm run dev",
+    "beforeBuildCommand": "npm run build"
+  },
+  "plugins": {
+    "sql": {
+      "preload": ["sqlite:laundryku.db"]
+    }
+  },
+  "app": {
+    "windows": [
+      {
+        "label": "main",
+        "title": "LaundryKu",
+        "width": 1280,
+        "height": 820,
+        "minWidth": 900,
+        "minHeight": 600,
+        "center": true,
+        "resizable": true,
+        "fullscreen": false
+      }
+    ],
+    "security": {
+      "csp": null
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "publisher": "LaundryKu",
+    "copyright": "Copyright © 2026 LaundryKu",
+    "category": "Business",
+    "shortDescription": "Manajemen keuangan usaha laundry",
+    "longDescription": "LaundryKu membantu mencatat order, pembayaran, pengeluaran, dan laporan keuangan usaha laundry secara offline.",
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ],
+    "android": {
+      "debugApplicationIdSuffix": ".debug"
+    }
+  }
+}
