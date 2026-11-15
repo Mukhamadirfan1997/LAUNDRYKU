@@ -86,4 +86,6 @@ powershell -NoProfile -ExecutionPolicy Bypass -File src-tauri/installer/generate
 
 - Commit rilis: `d635844` — "Rilis 1.0.0: branding installer resmi, EULA, dan mode per-machine"
 - Tag: `v1.0.0`
+- GitHub Release: https://github.com/Mukhamadirfan1997/LAUNDRYKU/releases/tag/v1.0.0
+  (publik, berisi installer `.exe`, `.msi`, dan file SHA-256)
 - Repo: https://github.com/Mukhamadirfan1997/LAUNDRYKU
