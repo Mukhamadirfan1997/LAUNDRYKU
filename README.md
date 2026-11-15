@@ -235,6 +235,15 @@ Lokasi persis juga ditampilkan di **Pengaturan → Database Lokal** dan pada kar
 Untuk mengulang dari database kosong: tutup aplikasi, hapus file
 `laundryku.db`, lalu jalankan ulang. Migrasi dan seed akan dibuat otomatis.
 
+Catatan penting: **installer tidak membawa database**. Database dibuat dan
+disimpan per akun Windows di lokasi di atas, sehingga instalasi ulang atau
+pembaruan aplikasi tidak menghapus data. Uninstaller menyediakan opsi
+**hapus data aplikasi** yang secara default tidak dicentang. Untuk benar-benar
+memulai dari kosong, tutup aplikasi lalu hapus `laundryku.db` beserta
+`laundryku.db-wal` dan `laundryku.db-shm`. Setelah itu aplikasi membuat database
+baru berisi data awal (profil usaha, 6 layanan, 6 kategori pengeluaran, dan akun
+admin).
+
 ## Checklist Uji Fase 1
 
 - [ ] `npm run tauri dev` membuka jendela berjudul **LaundryKu**.
