@@ -373,3 +373,4 @@ src-tauri/
 ```
 
 Dokumen acuan lengkap: [`DOKUMEN-ACUAN.md`](./DOKUMEN-ACUAN.md).
+Catatan rilis: [`CATATAN-RILIS.md`](./CATATAN-RILIS.md).
