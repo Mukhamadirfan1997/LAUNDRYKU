@@ -6,7 +6,8 @@ Aplikasi desktop offline-first untuk manajemen keuangan usaha laundry.
 Dibangun dengan **Tauri 2 + React + TypeScript + Vite + Tailwind CSS + SQLite**.
 
 > Status saat ini: **Fase 7 - Dashboard, Polishing, Rilis** selesai.
-> Seluruh fase pada `DOKUMEN-ACUAN.md` sudah dikerjakan dan siap dipaketkan.
+> Seluruh fase pada `DOKUMEN-ACUAN.md` sudah dikerjakan. Installer resmi
+> **LaundryKu 1.0.0** (NSIS `.exe` dan MSI `.msi`) sudah berhasil dibangun.
 
 ---
 
@@ -198,9 +199,19 @@ cargo check --manifest-path src-tauri/Cargo.toml
     `prefers-reduced-motion`, dan dialog/Sheet selalu punya judul aksesibel.
   - Versi aplikasi di footer, sidebar, halaman login, dan dashboard diambil dari
     `package.json` saat build agar tidak pernah tertinggal.
-- **Rilis**: konfigurasi bundle Tauri (nama produk, publisher, kategori,
-  deskripsi, ikon) selesai; `npm run tauri build` menghasilkan installer NSIS
-  `LaundryKu_0.1.0_x64-setup.exe` dan MSI `LaundryKu_0.1.0_x64_en-US.msi`.
+- **Rilis 1.0.0**: konfigurasi bundle Tauri lengkap (nama produk,
+  publisher, homepage, kategori, deskripsi, ikon, dan lisensi). Installer
+  NSIS memakai mode **semua pengguna** (Program Files), bahasa Indonesia,
+  halaman lisensi EULA (`src-tauri/installer/LICENSE.rtf`), ikon
+  installer/uninstaller, serta header dan sidebar bermerek; MSI memakai banner
+  dan dialog bermerek. `npm run tauri build` menghasilkan
+  `LaundryKu_1.0.0_x64-setup.exe` dan `LaundryKu_1.0.0_x64_en-US.msi`.
+  Aset grafis installer dibuat oleh `src-tauri/installer/generate-assets.ps1`
+  dan teks EULA dapat diedit di `src-tauri/installer/LICENSE.txt` lalu
+  diregenerasi ke `LICENSE.rtf`.
+  Installer belum ditandatangani secara digital, sehingga Windows SmartScreen
+  dapat menampilkan peringatan saat pertama kali dijalankan; menghilangkannya
+  memerlukan sertifikat *code signing*.
 
 ### Akun awal
 
@@ -331,10 +342,15 @@ Verifikasi Fase 5 memakai data uji dan akun kasir sementara; data uji, file uji,
 - [ ] Matikan animasi lewat pengaturan aksesibilitas Windows; transisi dan
       animasi aplikasi ikut berkurang.
 - [ ] `npm run typecheck`, `npm run build`, dan `cargo check` lulus tanpa error.
-- [ ] `npm run tauri build` selesai dan menghasilkan
-      `LaundryKu_0.1.0_x64-setup.exe` serta `LaundryKu_0.1.0_x64_en-US.msi`.
+- [x] Jalankan `npm run tauri build`; installer selesai dibuat dengan nama
+      `LaundryKu_1.0.0_x64-setup.exe` dan `LaundryKu_1.0.0_x64_en-US.msi`
+      (sudah diverifikasi pada build 1.0.0).
+- [ ] Buka installer: tampil header/sidebar bermerek LaundryKu, ikon aplikasi,
+      bahasa Indonesia, dan halaman lisensi; instalasi meminta izin
+      Administrator lalu memasang ke Program Files.
 - [ ] Pasang installer di mesin bersih: aplikasi terbuka dengan ikon dan nama
-      **LaundryKu**, login `admin` berhasil, dan data tersimpan setelah restart.
+      **LaundryKu**, login `admin` berhasil, data tetap ada setelah restart,
+      dan entri **LaundryKu** muncul di Start Menu serta Apps & Features.
 
 ## Struktur Singkat
 
@@ -352,6 +368,8 @@ src-tauri/
   src/           # lib.rs, main.rs, auth.rs, catalog.rs, customers.rs,
                  # orders.rs, expenses.rs, reports.rs, settings.rs
   capabilities/  # izin plugin Tauri
+  installer/     # aset NSIS/WiX, EULA, generate-assets.ps1
+  icons/         # ikon aplikasi dan installer
 ```
 
 Dokumen acuan lengkap: [`DOKUMEN-ACUAN.md`](./DOKUMEN-ACUAN.md).

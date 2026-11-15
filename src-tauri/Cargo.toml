@@ -1,10 +1,11 @@
 [package]
 name = "laundryku"
-version = "0.1.0"
+version = "1.0.0"
 description = "LaundryKu - Kelola laundry, catat kas, tanpa ribet"
 authors = ["LaundryKu"]
-license = ""
-repository = ""
+license = "LicenseRef-Proprietary"
+repository = "https://github.com/Mukhamadirfan1997/LAUNDRYKU"
+homepage = "https://github.com/Mukhamadirfan1997/LAUNDRYKU"
 edition = "2024"
 rust-version = "1.90"
 
